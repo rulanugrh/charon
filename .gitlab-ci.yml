@@ -5,9 +5,9 @@ image: "tmaier/docker-compose:latest"
 services:
   - ubuntu:20.04
 
-# before_script:
-#  - docker info
-#  - docker-compose --version
+before_script:
+  - docker info
+  - docker-compose --version
 
 # script for opening
 opening-job:
