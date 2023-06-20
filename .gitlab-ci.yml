@@ -1,9 +1,9 @@
 # Call image for docker-compose
-image: "tmaier/docker-compose:latest"
+# image: "tmaier/docker-compose:latest"
 
 # docker in docker because running docker-compose
 services:
-  - docker:dind
+  - ubuntu:20.04
 
 # before script
 before_script:
@@ -35,8 +35,9 @@ test-job:
 build-app:
   stage: build
   script:
+    - apt install docker-compose
     - echo "running docker-compose"
-    - make runDock
+    - docker-compose up -d
     - echo "success running docker"
 
   
