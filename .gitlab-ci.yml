@@ -1,14 +1,13 @@
 # Call image for docker-compose
-image: "tmaier/docker-compose:latest"
+image: "golang:latest"
 
 # docker in docker because running docker-compose
 services:
   - ubuntu:20.04
 
-# before script
-before_script:
-  - docker info
-  - docker-compose --version
+# before_script:
+#  - docker info
+#  - docker-compose --version
 
 # script for opening
 opening-job:
@@ -19,11 +18,8 @@ opening-job:
 
 
 # script for test build binary golang
-test-job:
-  image: "golang:latest"
-  services:
-    - ubuntu:20.04
-  stage: test
+build-job:
+  stage: build
   script:
     - make build
     - echo "success build"
@@ -32,12 +28,12 @@ test-job:
 
 
 # stage for build docker container
-build-app:
-  stage: build
-  script:
-    - apt install docker-compose
-    - echo "running docker-compose"
-    - docker-compose up -d
-    - echo "success running docker"
+#build-app:
+#  stage: build
+#  script:
+#    - apt install docker-compose
+#    - echo "running docker-compose"
+#    - docker-compose up -d
+#    - echo "success running docker"
 
   
