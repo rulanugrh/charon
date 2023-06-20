@@ -1,5 +1,5 @@
 # Call image for docker-compose
-image: "golang:latest"
+image: "tmaier/docker-compose:latest"
 
 # docker in docker because running docker-compose
 services:
@@ -32,6 +32,6 @@ build-app:
   stage: build
   script:
     - echo "running docker-compose"
-    - docker-compose up -d
+    - docker-compose build
     - echo "success running docker"
-    - docker-compose down  
+    - docker-compose down 
