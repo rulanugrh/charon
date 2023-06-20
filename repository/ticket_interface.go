@@ -1,9 +1,13 @@
 package repository
 
-import "github.com/rulanugrh/gometri/entities/domain"
+import (
+	"context"
+
+	"github.com/rulanugrh/gometri/entities/domain"
+)
 
 type TicketInterface interface {
-	CreateTicket(ticket domain.Ticket) (*domain.Ticket, error)
-	FindTicket() (*[]domain.Ticket, error)
-	FindById(id uint) (*domain.Ticket, error)
+	CreateTicket(ctx context.Context, ticket domain.Ticket) (*domain.Ticket, error)
+	FindTicket(ctx context.Context) (*[]domain.Ticket, error)
+	FindById(ctx context.Context, id uint) (*domain.Ticket, error)
 }
