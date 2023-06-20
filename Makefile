@@ -1,5 +1,4 @@
-PATH_BINARY=output
-BINARY_FILE=${PATH_BINARY}/output
+BINARY_FILE=output
 
 build:
 	go build -o ${BINARY_FILE} server.go

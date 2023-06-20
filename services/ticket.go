@@ -8,7 +8,6 @@ import (
 	"github.com/rulanugrh/gometri/entities/web"
 	"github.com/rulanugrh/gometri/repository"
 	"github.com/rulanugrh/gometri/utils"
-	"go.opentelemetry.io/otel/attribute"
 )
 
 type ticketservice struct {
@@ -72,12 +71,12 @@ func (tick *ticketservice) FindById(ctx context.Context, id uint) (*web.TicketRe
 	}
 
 	// Set attribute keyvalue for metric
-	attrs := []attribute.KeyValue{
-		utils.TicketStatus.String(string(data.Name)),
-	}
+	// attrs := []attribute.KeyValue{
+	//	utils.TicketStatus.String(string(data.Name)),
+	// }
 
 	// Ticketcounter for metric
-	utils.TicketCounter.Add(ctx, 1, attrs)
+	utils.TicketCounter.Add(ctx, 1, nil)
 
 	// Create Response API
 	response := web.TicketResponse{
