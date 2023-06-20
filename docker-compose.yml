@@ -1,0 +1,42 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    environment:
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+    ports:
+      - 5000:5000
+    
+    depends_on:
+      - dbserv
+    networks:
+      - gometri
+  
+  otelServ:
+    image: otel/opentelemetry-collector-contrib
+    container_name: otelServ
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - 4318:4318
+      - 13133:13133
+      
+    networks:
+      - gometri
+  dbserv:
+    image: postgres:latest
+    container_name: dbserv
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - gometri
+
+networks:
+  gometri:
