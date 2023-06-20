@@ -18,22 +18,20 @@ opening-job:
 
 
 # script for test build binary golang
-build-job:
-  stage: build
-  script:
-    - make build
-    - echo "success build"
-    - echo "going to download module"
-    - sleep 20
+#build-job:
+#  stage: build
+#  script:
+#    - make build
+#    - echo "success build"
+#    - echo "going to download module"
+#    - sleep 20
 
 
 # stage for build docker container
-#build-app:
-#  stage: build
-#  script:
-#    - apt install docker-compose
-#    - echo "running docker-compose"
-#    - docker-compose up -d
-#    - echo "success running docker"
-
-  
+build-app:
+  stage: build
+  script:
+    - echo "running docker-compose"
+    - docker-compose up -d
+    - echo "success running docker"
+    - docker-compose down  
