@@ -9,7 +9,6 @@ services:
 before_script:
   - docker info
   - docker-compose --version
-  - apt install --yes go
 
 # script for opening
 opening-job:
