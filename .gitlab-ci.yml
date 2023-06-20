@@ -26,7 +26,7 @@ opening-job:
 
 # script for test build binary golang
 test-job:
-  image: golang:latest
+  image: "golang:latest"
   services:
     - ubuntu:20.04
   stage: test
