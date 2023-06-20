@@ -29,7 +29,7 @@ test-job:
   image: "golang:latest"
   services:
     - ubuntu:20.04
-  stage: test
+  stage: "test"
   script:
     - make build
     - echo "success build"
@@ -39,7 +39,7 @@ test-job:
 
 # stage for build docker container
 build-app:
-  stage: build
+  stage: "build"
   script:
     - echo "running docker-compose"
     - make runDock
