@@ -34,7 +34,7 @@ test-job:
 
 # stage for build docker container
 build-app:
-  stage: prod
+  stage: build
   script:
     - echo "running docker-compose"
     - make runDock
