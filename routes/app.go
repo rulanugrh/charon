@@ -26,9 +26,17 @@ func Run(ticket handlers.TicketHandlers) {
 	api := mux.NewRouter().StrictSlash(true)
 
 	api.Use(otelmux.Middleware(name))
-	api.Handle("/ticket", otelhttp.WithRouteTag("/api/v1/ticket", otelhttp.NewHandler(http.HandlerFunc(ticket.CreateTicket), name))).Methods("POST")
-	api.Handle("/ticket/{id}", otelhttp.WithRouteTag("/api/v1/ticket/{id}", otelhttp.NewHandler(http.HandlerFunc(ticket.FindById), name))).Methods("GET")
-	api.Handle("/ticket", otelhttp.WithRouteTag("/api/v1/ticket", otelhttp.NewHandler(http.HandlerFunc(ticket.FindTicket), name))).Methods("GET")
+	api.Handle("/ticket",
+		otelhttp.WithRouteTag("/api/v1/ticket",
+			otelhttp.NewHandler(http.HandlerFunc(ticket.CreateTicket), name))).Methods("POST")
+
+	api.Handle("/ticket/{id}",
+		otelhttp.WithRouteTag("/api/v1/ticket/{id}",
+			otelhttp.NewHandler(http.HandlerFunc(ticket.FindById), name))).Methods("GET")
+
+	api.Handle("/ticket",
+		otelhttp.WithRouteTag("/api/v1/ticket",
+			otelhttp.NewHandler(http.HandlerFunc(ticket.FindTicket), name))).Methods("GET")
 
 	// Config Server
 	conf := config.GetConfig()
