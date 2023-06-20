@@ -1,5 +1,5 @@
 # Call image for docker-compose
-# image: "tmaier/docker-compose:latest"
+image: "tmaier/docker-compose:latest"
 
 # docker in docker because running docker-compose
 services:
