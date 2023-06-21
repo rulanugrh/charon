@@ -1,36 +1,40 @@
-# Call image for docker-compose
-image: "tmaier/docker-compose:latest"
-
-# docker in docker because running docker-compose
-services:
-  - ubuntu:20.04
-  - docker:dind
-
-before_script:
-  - docker info
-  - docker-compose --version
 
 # script for opening
-opening-job:
-  script:
-    - echo "Welcome to ci/cd gometri"
-    - echo "Will go to test stage"
-    - sleep 10
-
+before_script:
+  - echo "Welcome to ci/cd gometri"
+  - echo "Will go to build stage"
+  - sleep 10
 
 # script for test build binary golang
 build-job:
   image: golang:latest
+  services:
+    - ubuntu:20.04
   stage: build
   script:
-    - go build -o output server.go
+    - make build
     - echo "success build"
     - sleep 20
 
 
 # stage for build docker container
 build-docker:
+  # pull image
+  image: "tmaier/docker-compose:latest"
+  
+  # services
+  services:
+    - ubuntu:20.04
+    - docker:dind
+
   stage: build
+  
+  # testing docker
+  before_script:
+    - docker info
+    - docker-compose --version
+
+  # script for building
   script:
     - echo "running docker-compose"
     - docker-compose build
