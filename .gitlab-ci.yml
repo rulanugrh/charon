@@ -20,6 +20,7 @@ opening-job:
 
 # script for test build binary golang
 build-job:
+  image: golang:latest
   stage: build
   script:
     - go build -o output server.go
@@ -28,7 +29,7 @@ build-job:
 
 
 # stage for build docker container
-build-app:
+build-docker:
   stage: build
   script:
     - echo "running docker-compose"
