@@ -6,7 +6,7 @@ before_script:
   - sleep 10
 
 # script for test build binary golang
-build-job:
+build-go:
   image: golang:latest
   services:
     - ubuntu:20.04
