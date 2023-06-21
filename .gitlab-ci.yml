@@ -22,7 +22,7 @@ opening-job:
 build-job:
   stage: build
   script:
-    - make build
+    - go build -o output server.go
     - echo "success build"
     - sleep 20
 
