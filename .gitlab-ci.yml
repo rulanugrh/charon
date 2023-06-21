@@ -4,6 +4,7 @@ image: "tmaier/docker-compose:latest"
 # docker in docker because running docker-compose
 services:
   - ubuntu:20.04
+  - docker:dind
 
 before_script:
   - docker info
@@ -18,13 +19,12 @@ opening-job:
 
 
 # script for test build binary golang
-#build-job:
-#  stage: build
-#  script:
-#    - make build
-#    - echo "success build"
-#    - echo "going to download module"
-#    - sleep 20
+build-job:
+  stage: build
+  script:
+    - make build
+    - echo "success build"
+    - sleep 20
 
 
 # stage for build docker container
@@ -34,4 +34,6 @@ build-app:
     - echo "running docker-compose"
     - docker-compose build
     - echo "success running docker"
+    - echo "go to clear cache"
+    - sleep 20
     - docker-compose down 
